@@ -4213,8 +4213,10 @@ function navCacheStats(){
 }
 
 function _showProxyNote(show){
-  if(!_proxyNote) _proxyNote = document.getElementById('proxyNote');
-  if(_proxyNote) _proxyNote.classList.toggle('show', show);
+  // Browser-side CORS proxies were removed. Keep this helper for older call sites,
+  // but always hide the old proxy note and avoid undeclared _proxyNote errors.
+  var note = document.getElementById('proxyNote');
+  if(note) note.classList.toggle('show', false);
 }
 
 function _updateCacheBadge(fromCache){
